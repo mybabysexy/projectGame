@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: pink;
+    font: 13pt "Tahoma";
+}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font: 13pt "Tahoma";
+}
+.page {
+    width: 21cm;
+    overflow:hidden;
+    min-height:297mm;
+    padding: 0.6cm 1.5cm;
+    margin-left:auto;
+    margin-right:auto;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font: 13pt "Tahoma";
+}
+@page {
+size: A4;
+margin: 0;
+}
+
+.logo
+{
+    text-align: center;
+    display: block;
+    top: -20px;
+}
+#title1
+{
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+#title2
+{
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 2;
+}
+
+.billTable
+{
+    border: 1px solid black;
+    margin-top: 5px;
+}
+
+.row
+{
+    font-weight: 700;
+    font-size: 13px;
+    height: 30px;
+    text-align: center;
+}
+
+.productRow
+{
+    font-size: 13px;
+    text-align: center;
+    height: 30px;
+}
+
+.finalRow
+{
+    font-weight: 700;
+    font-size: 13px;
+    height: 30px;
+    text-align: center;
+    background-color: lightgrey;
+}
+
+#sidebar
+{
+    background-color: white;
+    width: 500px;
+    height: 100vh;
+    display: none; 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    overflow: auto;
+}
+
+#sidesidebar
+{
+    display: block; 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: auto;
+    float: left;
+    width: 50px; 
+    height: 100vh;
+    background-color: hotpink;
+    background-image: url(sidebar.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+#printbar
+{
+    display: block; 
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    overflow: auto;
+    float: right;
+    width: 50px; 
+    height: 100vh;
+    background-color: red;
+    background-image: url(sidebar.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.SL
+{
+    border-style: none; font-size: 20px; text-align: center;
+}
+
+.thumb
+{
+    width: 200px;
+    height: 200px;
+}
+
+.foot
+{
+    position: fixed;
+    left: 0;
+    bottom: 0.5cm;
+    width: 100%;
+    font-size: 12px;
+}
+
+.head
+{
+    position: fixed;
+    left: 0;
+    top: 0.5cm;
+    width: 100%;
+    font-size: 12px;
+}
+
+::-webkit-scrollbar {
+width: 10px;
+height: 10px;
+}
+
+::-webkit-scrollbar-track {
+border: 1px solid pink;
+background-color: pink;
+}
+
+::-webkit-scrollbar-thumb {
+background: hotpink;  
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #88ba1c;  
+}
