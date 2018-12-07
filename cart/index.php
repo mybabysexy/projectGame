@@ -181,7 +181,27 @@
 										}
 								?>
 							</table>
-							<input type="submit" class="btn btn-primary" value="Cap nhat" name="">
+							<input type="submit" class="btn btn-lg btn-primary" value="Cập nhật">
+							<script type="text/javascript">
+								function buy()
+								{
+									<?php
+									if(isset($_SESSION['nameKH']))
+									{
+										?>
+											if(confirm("Chắc chắn chứ?")) window.location.href="../checkout/";
+										<?php
+									}
+									else
+									{
+										?>
+											alert("Hiện tại hệ thống chưa hỗ trợ thanh toán vãng lai, hãy đăng nhập để sử dụng chức năng này");
+										<?php
+									}
+									?>
+								}
+							</script>
+							<input type="button" class="btn btn-lg btn-success" value="Thanh toán" onclick="buy()">
 						</div>
 						</form>
 						<?php
