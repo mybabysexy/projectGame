@@ -136,9 +136,15 @@
 				<div align="center">
 					<h1 id="header" style="margin: 50px">- Giỏ hàng -</h1>
 					<?php
+					// foreach ($_SESSION['cartItem'] as $key => $value) {
+					// 	if (isset($key)) {
+					// 		echo $key;
+					// 	}
+					// }
 					if(count($_SESSION['cartItem']) > 0)
 					{
 						?>
+						<form action="updateCart.php">
 						<div style="width: 50%">
 							<table cellspacing="0" class="table" align="center">
 								<tr>
@@ -159,17 +165,25 @@
 												<td align="center" style="vertical-align: middle;"><?php echo $i++ ?></td>
 												<td align="center" style="vertical-align: middle;"><?php echo $SP['tenSP'];?></td>
 												<td align="center" style="vertical-align: middle;">
-													<input type="text" id="SL<?php echo $i;?>" style="text-align: center;" size="1" value="<?php echo $value;?>">
+													<input type="tel" id="SL<?php echo $i;?>" name="<?php echo $SP['maSP'] ?>" onkeyup="price<?php echo $i;?>()" style="text-align: center;" size="1" value="<?php echo $value;?>">
 												</td>
-												<td align="center" style="vertical-align: middle;"><?php echo $SP['gia']*$value;?></td>
+												<td align="center" id="gia<?php echo $i;?>" style="vertical-align: middle;"><?php echo $SP['gia']*$value;?></td>
 												<td align="center" style="vertical-align: middle;"><a href="../delSP.php?id=<?php echo $SP['maSP'] ?>" class="btn btn-danger">DELETE</a></td>
+												<script type="text/javascript">
+													function price<?php echo $i;?>()
+													{
+														var gia = <?php echo $SP['gia'] ?>;
+														document.getElementById("gia<?php echo $i;?>").innerHTML = parseInt(document.getElementById("SL<?php echo $i;?>").value) * gia;
+													}
+												</script>
 											</tr>
 										<?php
 										}
 								?>
 							</table>
-							<input type="button" class="btn btn-primary" value="Cap nhat" name="">
+							<input type="submit" class="btn btn-primary" value="Cap nhat" name="">
 						</div>
+						</form>
 						<?php
 					}
 					else
