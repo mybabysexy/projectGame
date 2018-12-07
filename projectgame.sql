@@ -2,10 +2,10 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 02, 2018 at 12:21 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost
+-- Generation Time: Dec 07, 2018 at 10:56 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,9 +32,6 @@ CREATE TABLE `hoadon` (
   `maDonHang` int(11) NOT NULL,
   `ngaydathang` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `maTK` int(11) NOT NULL,
-  `maSP` int(11) DEFAULT NULL,
-  `gia` int(11) DEFAULT NULL,
-  `soluong` int(11) DEFAULT NULL,
   `tongTien` int(11) DEFAULT NULL,
   `tinhTrang` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -43,19 +40,30 @@ CREATE TABLE `hoadon` (
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`maDonHang`, `ngaydathang`, `maTK`, `maSP`, `gia`, `soluong`, `tongTien`, `tinhTrang`) VALUES
-(1, '2018-11-28 03:44:03', 1, 5, 290000, 1, 290000, 1),
-(2, '2018-11-28 04:11:16', 1, 1, 120000, 1, 120000, 1),
-(3, '2018-11-28 04:24:25', 1, 2, 155000, 1, 155000, 1),
-(4, '2018-11-28 04:26:13', 1, 2, 155000, 1, 155000, 1),
-(5, '2018-11-28 04:26:35', 1, 3, 190000, 1, 190000, 1),
-(6, '2018-11-28 04:41:50', 1, 2, 155000, 1, 155000, 1),
-(7, '2018-11-28 04:49:51', 1, 2, 155000, 1, 155000, 1),
-(8, '2018-11-28 04:54:16', 1, 2, 155000, 1, 155000, 1),
-(9, '2018-11-28 04:54:26', 1, 2, 155000, 1, 155000, 1),
-(10, '2018-11-28 04:56:06', 1, 7, 320000, 1, 320000, 1),
-(11, '2018-11-28 04:56:34', 1, 11, 399000, 1, 399000, 1),
-(12, '2018-11-28 04:56:41', 1, 11, 399000, 1, 399000, 1);
+INSERT INTO `hoadon` (`maDonHang`, `ngaydathang`, `maTK`, `tongTien`, `tinhTrang`) VALUES
+(10000, '2018-12-07 02:40:44', 1, 190000, 1),
+(10001, '2018-12-07 04:40:33', 1, 540000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoadonchitiet`
+--
+
+CREATE TABLE `hoadonchitiet` (
+  `maDonHang` int(11) DEFAULT NULL,
+  `maSP` int(11) DEFAULT NULL,
+  `gia` int(11) DEFAULT NULL,
+  `soluong` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hoadonchitiet`
+--
+
+INSERT INTO `hoadonchitiet` (`maDonHang`, `maSP`, `gia`, `soluong`) VALUES
+(10000, 3, 190000, 1),
+(10001, 4, 540000, 1);
 
 -- --------------------------------------------------------
 
@@ -156,6 +164,13 @@ CREATE TABLE `tkadmin` (
   `maQuyen` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tkadmin`
+--
+
+INSERT INTO `tkadmin` (`maTK`, `tenTK`, `matKhau`, `sdt`, `email`, `maQuyen`) VALUES
+(1, 'cuccut', 'cuccut', '', '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -176,7 +191,7 @@ CREATE TABLE `tkuser` (
 --
 
 INSERT INTO `tkuser` (`maTK`, `tenKH`, `sdt`, `email`, `tenTK`, `matKhau`) VALUES
-(1, 'Duc Minh', '975928214', '3dogize@gmail.com', 'mybabysexy', 'Cuccutvang123');
+(1, 'Duc Minh', '0975928214', '3dogize@gmail.com', 'mybabysexy', 'Cuccutvang123');
 
 --
 -- Indexes for dumped tables
@@ -187,9 +202,15 @@ INSERT INTO `tkuser` (`maTK`, `tenKH`, `sdt`, `email`, `tenTK`, `matKhau`) VALUE
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`maDonHang`),
-  ADD KEY `maSP` (`maSP`),
-  ADD KEY `gia` (`gia`),
   ADD KEY `maTK` (`maTK`);
+
+--
+-- Indexes for table `hoadonchitiet`
+--
+ALTER TABLE `hoadonchitiet`
+  ADD KEY `maDonHang` (`maDonHang`),
+  ADD KEY `maSP` (`maSP`),
+  ADD KEY `gia` (`gia`);
 
 --
 -- Indexes for table `nsx`
@@ -223,7 +244,10 @@ ALTER TABLE `tkadmin`
 -- Indexes for table `tkuser`
 --
 ALTER TABLE `tkuser`
-  ADD PRIMARY KEY (`maTK`);
+  ADD PRIMARY KEY (`maTK`),
+  ADD UNIQUE KEY `tenTK` (`tenTK`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `sdt` (`sdt`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -233,7 +257,7 @@ ALTER TABLE `tkuser`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `maDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `maDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10002;
 
 --
 -- AUTO_INCREMENT for table `nsx`
@@ -257,7 +281,7 @@ ALTER TABLE `theloai`
 -- AUTO_INCREMENT for table `tkadmin`
 --
 ALTER TABLE `tkadmin`
-  MODIFY `maTK` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `maTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tkuser`
@@ -273,8 +297,15 @@ ALTER TABLE `tkuser`
 -- Constraints for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`maSP`) REFERENCES `sanpham` (`maSP`),
   ADD CONSTRAINT `hoadon_ibfk_2` FOREIGN KEY (`maTK`) REFERENCES `tkuser` (`maTK`);
+
+--
+-- Constraints for table `hoadonchitiet`
+--
+ALTER TABLE `hoadonchitiet`
+  ADD CONSTRAINT `hoadonchitiet_ibfk_1` FOREIGN KEY (`maDonHang`) REFERENCES `hoadon` (`maDonHang`),
+  ADD CONSTRAINT `hoadonchitiet_ibfk_2` FOREIGN KEY (`maSP`) REFERENCES `sanpham` (`maSP`),
+  ADD CONSTRAINT `hoadonchitiet_ibfk_3` FOREIGN KEY (`gia`) REFERENCES `sanpham` (`gia`);
 
 --
 -- Constraints for table `sanpham`
