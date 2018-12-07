@@ -33,7 +33,7 @@ include '../template.php';
 					<script type="text/javascript">
 						function go()
 						{
-							window.location.href="../buy.php?id=<?php echo $sp['maSP'] ?>";
+							window.location.href="../buyNOW.php?id=<?php echo $sp['maSP'] ?>";
 						}
 					</script>
 					<input type="button" name="" class="btn btn-lg btn-success" value="Thanh toán" onclick="go()">

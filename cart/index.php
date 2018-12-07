@@ -59,7 +59,7 @@ include '../template.php';
 									if(isset($_SESSION['nameKH']))
 									{
 										?>
-											if(confirm("Chắc chắn chứ?")) window.location.href="../checkout/";
+											if(confirm("Chắc chắn chứ?")) window.location.href="../thanhtoan/";
 										<?php
 									}
 									else
