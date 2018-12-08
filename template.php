@@ -29,6 +29,8 @@
 		.btnBuyNow {width: 90px; height: 35px; font-size: 15px; border: 0; background-color: orange; border-radius: 8px; color: black; margin: 0px 2px; cursor: pointer;}
 		.pageButton {width: 35px; height: 35px; background-color: lightgreen; border: none; font-size: 20px; margin: 2px}
 
+		.err {font-size: 13px; color: red; font-weight: bold;}
+
 		#footer {height: 70px; width: 100%; background-color: darkviolet; margin-top: 20px; display: flex; align-items: center; justify-content: center; color: white}
 
 		::-webkit-scrollbar {
@@ -80,18 +82,20 @@
 			if(document.getElementById("username").value.length == 0)
 			{
 				document.getElementById("errUsername").innerHTML = "Hãy điền tên đăng nhập";
+				document.getElementById("username").style.border = "2px solid red";
 			}
 			else if(document.getElementById("username").value.length >=8 && document.getElementById("username").value.length <= 16)
 			{
 				var kqUser = regUser.test(document.getElementById("username").value);
 				if(kqUser)
 				{
-					document.getElementById("errUsername").innerHTML = "";	
+					document.getElementById("errUsername").innerHTML = "";
+					document.getElementById("username").style.border = "1px solid #ccc";
 					check++;	
 				}
 				else
 				{
-					document.getElementById("errUsername").innerHTML="Không đúng định dạng";	
+					document.getElementById("errUsername").innerHTML="Không đúng định dạng";
 				}
 			}
 			else
@@ -102,6 +106,7 @@
 			if(document.getElementById("password").value.length == 0)
 			{
 				document.getElementById("errPassword").innerHTML = "Hãy điền mật khấu";
+				document.getElementById("password").style.border = "2px solid red";
 			}
 			else if(document.getElementById("password").value.length >= 8)
 			{
@@ -109,6 +114,7 @@
 				if(kqMatKhau)
 				{
 					document.getElementById("errPassword").innerHTML="";
+					document.getElementById("password").style.border = "1px solid #ccc";
 					check++;		
 				}
 				else
@@ -121,6 +127,7 @@
 			if(document.getElementById("repassword").value.length == 0)
 			{
 				document.getElementById("errRepassword").innerHTML = "Hãy nhập lại mật khấu";
+				document.getElementById("repassword").style.border = "2px solid red";
 			}
 			else if(document.getElementById("repassword").value != document.getElementById("password").value)
 			{
@@ -129,12 +136,24 @@
 			else
 			{
 				document.getElementById("errRepassword").innerHTML = "";
+				document.getElementById("repassword").style.border = "1px solid #ccc";
 				check++;
+			}
+
+			if(document.getElementById("nameKH").value.length == 0)
+			{
+				document.getElementById("errnameKH").innerHTML = "Hãy điền tên của bạn";
+				document.getElementById("nameKH").style.border = "2px solid red";
+			}
+			else{
+				document.getElementById("errnameKH").innerHTML = "";
+				document.getElementById("nameKH").style.border = "1px solid #ccc";
 			}
 
 			if(document.getElementById("email").value.length == 0)
 			{
 				document.getElementById("errEmail").innerHTML = "Hãy điền email";
+				document.getElementById("email").style.border = "2px solid red";
 			}
 			else
 			{
@@ -142,6 +161,7 @@
 				if(kqEmail)
 				{
 					document.getElementById("errEmail").innerHTML = "";
+					document.getElementById("email").style.border = "1px solid #ccc";
 					check++;		
 				}
 				else
@@ -153,6 +173,7 @@
 			if(document.getElementById("sdt").value.length == 0)
 			{
 				document.getElementById("errSDT").innerHTML = "Hãy điền số điện thoại";
+				document.getElementById("sdt").style.border = "2px solid red";
 			}
 			else
 			{
@@ -160,6 +181,7 @@
 				if(kqDienThoai)
 				{
 					document.getElementById("errSDT").innerHTML = "";
+					document.getElementById("sdt").style.border = "1px solid #ccc";
 					check++;	
 				}else
 				{
@@ -240,7 +262,7 @@
 						<div style="width: 30%; height: 100%; background-color: transparent; display: flex; align-items: center">
 							<p style="margin: 0">Xin chào: <a href="/taiKhoan" style="text-decoration: none; color: blue; font-weight: bold"><?php echo $_SESSION['nameKH']?></a></p>
 							<button style="border: 0; background-color: transparent; width: 110px; height: 35px; cursor: pointer; border: 3px solid #9F3434; border-radius: 25px; margin-left: 20px">
-								<a href="logout.php" style="text-decoration: none; color: #9F3434; font-weight: bold">Đăng xuất</a>
+								<a href="../logout.php" style="text-decoration: none; color: #9F3434; font-weight: bold">Đăng xuất</a>
 							</button>
 						</div>
 						<?php
@@ -275,7 +297,7 @@
 			</div>
 		</div>
 		<div id="searchBar">
-			<form>
+			<form action="../">
 				<input type="text" name="q" placeholder="NHẬP ÍT NHẤT 3 KÍ TỰ" style="background-color: transparent; border: none; border-bottom: 2px solid black; height: 50px; font-size: 40px; margin-left: 50px">
 			</form>
 		</div>
