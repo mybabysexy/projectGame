@@ -69,9 +69,62 @@ include '../template.php';
 					</div>
 					<a href="edit.php" class="btn btn-lg btn-success">Chỉnh sửa</a>
 					<a href="changePassword.php" class="btn btn-lg btn-warning">Đổi mật khẩu</a>
-					<a href="#" class="btn btn-lg btn-info">Lịch sử giao dịch</a>
+					<!-- <a href="#" class="btn btn-lg btn-info">Lịch sử giao dịch</a> -->
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+						Lịch sử giao dịch
+						</button>
 				</div>
 			</div>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Lịch sử giao dịch</h4>
+							</div>
+							<div class="modal-body">
+								<table class="table">
+									<tr>
+										<th width="60px">Ma HD</th>
+										<th width="100px">Ngay dat hang</th>
+										<th width="90px">Tong tien</th>
+										<th width="80px">Tinh Trang</th>
+										<th width="70px"></th>
+									</tr>
+									<?php 
+										$result = mysqli_query($con, "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang` FROM `hoadon` where maTK = $idKH");
+										while($DH = mysqli_fetch_array($result))
+										{
+											?>
+											<tr>
+												<td  style="vertical-align: middle;">
+													<?php echo $DH["maDonHang"] ?>
+												</td>
+												<td  style="vertical-align: middle;">
+													<?php echo $DH["ngaydathang"] ?>
+												</td>
+												<td  style="vertical-align: middle;">
+													<?php echo $DH["tongTien"] ?>
+												</td>
+												<td  style="vertical-align: middle;">
+													<?php echo $DH["tinhTrang"]? "Success":"Canceled" ?>
+												</td>
+												<td  style="vertical-align: middle;">
+													<input type="button" class="btn btn-primary" value="Chi tiet" name="">
+												</td>
+											</tr>
+											<?php
+										}
+									?>
+								</table>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 		</div>
 		<div id="footer">
 			Lương Minh Đức - Vũ Văn Toàn

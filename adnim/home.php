@@ -18,15 +18,15 @@
 <body>
 	<div class="container">
 		<a href="../logout.php" class="btn btn-primary btn-lg">Logout</a>
-		<h1>Danh sach hoa don</h1>
+		<h1 style="margin-bottom: 50px">Danh sach hoa don</h1>
 		<form class="form-group form-inline">
 			<table cellpadding="20px" cellspacing="0">
 				<tr>
 					<td width="170px">
-						Ma HD: <input type="text" name="maHD" class="form-control" style="width: 100px;">
+						Ma HD: <input type="text" name="maHD" class="form-control" style="width: 100px;" value="<?php if(isset($_GET['maHD'])) echo  $_GET['maHD']; ?>">
 					</td>
 					<td width="280px">
-						Ten KH: <input type="text" name="tenKH" class="form-control" style="">
+						Ten KH: <input type="text" name="tenKH" class="form-control" style="" value="<?php if(isset($_GET['tenKH'])) echo  $_GET['tenKH']; ?>">
 					</td>
 					<td width="290px">
 						Ngay dat hang: <input type="date" class="form-control" name="date">
@@ -62,28 +62,29 @@
 				<th width="160px">Email</th>
 				<th width="90px">Tong tien</th>
 				<th width="80px">Tinh Trang</th>
+				<th width="80px">Tinh Trang</th>
 			</tr>
 			<?php 
-				$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK";
+				$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK order by maDonHang";
 				if (isset($_GET['tinhTrang'])) {
 					if($_GET['tinhTrang'] != 999)
 					{
 						$tinhTrang = $_GET['tinhTrang'];
-						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tinhTrang = $tinhTrang";
+						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tinhTrang = $tinhTrang order by maDonHang";
 					}
 				}
 				if (isset($_GET['maHD'])) {
 					if($_GET['maHD'] > 0)
 					{
 						$maHD = $_GET['maHD'];
-						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where maDonHang = $maHD";
+						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where maDonHang = $maHD order by maDonHang";
 					}
 				}
 				if (isset($_GET['tenKH'])) {
-					if($_GET['tenKH'] > 0)
+					if($_GET['tenKH'] >= 0)
 					{
 						$tenKH = $_GET['tenKH'];
-						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tenKH like '%$tenKH%'";
+						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tenKH like '%$tenKH%' order by maDonHang";
 					}
 				}
 				$result = mysqli_query($con, $sql);
@@ -114,6 +115,9 @@
 						</td>
 						<td>
 							<?php echo $DH["tinhTrang"]? "Success":"Canceled" ?>
+						</td>
+						<td  style="vertical-align: middle;">
+							<input type="button" class="btn btn-primary" value="Chi tiet" name="">
 						</td>
 					</tr>
 					<?php

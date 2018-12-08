@@ -49,17 +49,17 @@ include '../template.php';
 						}
 						?>
 						<tr>
-							<td colspan="2" align="center" style="vertical-align: middle;">
+							<td colspan="2" align="center" style="vertical-align: middle;font-weight: bold">
 								Tong
 							</td>
-							<td align="center" style="vertical-align: middle;">
+							<td align="center" style="vertical-align: middle;font-weight: bold">
 								<span id="sumSL"></span>
 								<script type="text/javascript">
 								var sl = <?php echo $sumSL ?>;
 								document.getElementById("sumSL").innerHTML = sl;
 								</script>
 							</td>
-							<td align="center" style="vertical-align: middle;">
+							<td align="center" style="vertical-align: middle;font-weight: bold">
 								<span id="sumPrice" name="sumPrice"></span>
 								<script type="text/javascript">
 								var pr = <?php echo $sumPrice ?>;
@@ -89,7 +89,7 @@ include '../template.php';
 					?>
 					}
 					</script>
-					<input type="button" class="btn btn-lg btn-success" value="Thanh toán" onclick="buy()" id="thanhtoanbtn">
+					<input type="button" class="btn btn-lg btn-success" value="Xác nhận" onclick="buy()" id="thanhtoanbtn">
 				</div>
 			</form>
 			<?php

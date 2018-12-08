@@ -32,8 +32,8 @@ include '../template.php';
 								}
 							?>
 						<div align="center" style="margin: 10px; margin-top: 20px; margin-bottom: 50px;">
-							<input type="button" id="loginButton" onclick="login()" value="Đăng nhập" class="btn btn-primary btn-lg">
 							<a href="../signup" class="btn btn-lg btn-success">Đăng ký</a>
+							<input type="button" id="loginButton" onclick="login()" value="Đăng nhập" class="btn btn-primary btn-lg">
 						</div>
 
 					</div>

@@ -25,7 +25,7 @@
 
 		$sql = "insert into hoadon(maDonHang,maTK,tongTien,tinhTrang) values($nextCode,$maKH, $sumPrice, 1)";
 		mysqli_query($con, $sql);
-		
+
 		foreach ($_SESSION['cartItem'] as $key => $value) 
 		{
 			$id = $key;
@@ -39,6 +39,7 @@
 				mysqli_query($con, $sql);
 			}
 		}
+		unset($_SESSION['cartItem']);
 		header("location: ../checkout/done.php");
 		mysqli_close($con);
 	}
