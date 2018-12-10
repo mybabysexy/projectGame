@@ -76,7 +76,9 @@ include 'template.php';
 							?>
 								<div style="width: 370px; height: 363px; margin: 5px" class="col-lg-4 col-md-6 col-sm-6">
 									<div style="width: 370px; height: 208px;">
-										<a href="sanpham/index.php?id=<?php echo $sp['maSP'] ?>"><img src="<?php echo $sp["maAnh"]; ?>" style="width: 370px"></a>
+										<a href="sanpham/index.php?id=<?php echo $sp['maSP'] ?>">
+											<img src="<?php echo $sp["maAnh"]; ?>" style="width: 370px">
+										</a>
 									</div>
 									<div style="width: 370px; height: 155px; background-color: #E6E6E6; position: absolute; text-align: center;">
 										<p class="spName">
