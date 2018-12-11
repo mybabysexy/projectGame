@@ -1,8 +1,7 @@
 <?php session_start(); 
 include 'template.php';
 ?>
-
-		<div id="banner" align="center">
+	<div id="banner" align="center">
 			<!-- <img src="banner.png" height="600px" width="1915px"> -->
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 600px">
 				<!-- Indicators -->
