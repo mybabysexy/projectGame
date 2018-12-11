@@ -100,7 +100,6 @@ include 'template.php';
 													if(isset($_SESSION['nameKH']))
 													{
 														?>
-															// if(confirm("Chắc chắn chứ?")) window.location.href="buy.php?id=<?php echo $sp['maSP'] ?>";
 															if(confirm("Chắc chắn chứ?")) window.location.href="./checkout/?id=<?php echo $sp['maSP'] ?>";
 														<?php
 													}
