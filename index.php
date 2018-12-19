@@ -1,8 +1,7 @@
 <?php session_start(); 
 include 'template.php';
 ?>
-
-		<div id="banner" align="center">
+	<div id="banner" align="center">
 			<!-- <img src="banner.png" height="600px" width="1915px"> -->
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 600px">
 				<!-- Indicators -->
@@ -101,7 +100,6 @@ include 'template.php';
 													if(isset($_SESSION['nameKH']))
 													{
 														?>
-															// if(confirm("Chắc chắn chứ?")) window.location.href="buy.php?id=<?php echo $sp['maSP'] ?>";
 															if(confirm("Chắc chắn chứ?")) window.location.href="./checkout/?id=<?php echo $sp['maSP'] ?>";
 														<?php
 													}
