@@ -17,7 +17,7 @@ include '../template.php';
 										<div class="alert alert-danger">
 										    <strong>Oops!</strong> Đã có lỗi xảy ra hãy kiểm tra lại dữ liệu nhập vào
 										</div>
-									<?
+									<?php
 								}
 								if($_GET['c'] == 1)
 								{
@@ -25,7 +25,7 @@ include '../template.php';
 										<div class="alert alert-info">
 										    <strong>Thành công!</strong> Mật khẩuđã được thay đổi
 										</div>
-									<?
+									<?php
 								}
 								if($_GET['c'] == 2)
 								{
@@ -33,7 +33,7 @@ include '../template.php';
 										<div class="alert alert-info">
 										    <strong>Thành công!</strong> Thông tin đã được thay đổi
 										</div>
-									<?
+									<?php
 								}
 						}
 						?>
