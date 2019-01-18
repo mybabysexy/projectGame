@@ -19,10 +19,11 @@ include '../template.php';
 							<input type="password" id="pass" name="password" class="form-control" style="width: 250px" placeholder="password" required>
 						</div>
 						<div align="center" style="margin: 10px; margin-top: 20px">
-							<span id="errLogin" style="color: red"></span>
+							<span id="errLogin" style="color: red; font-weight: bold"></span>
 						</div>
 						<?php 
 							if(isset($_GET['err']))
+							{
 								if($_GET['err'] == 1) {
 									?>
 										<script type="text/javascript">
@@ -30,7 +31,15 @@ include '../template.php';
 										</script>
 									<?php
 								}
-							?>
+								if($_GET['err'] == 2) {
+									?>
+										<script type="text/javascript">
+											document.getElementById("errLogin").innerHTML = "Tài khoản đã bị khóa do phát hiện dấu hiệu gian lận";
+										</script>
+									<?php
+								}
+							}	
+						?>
 						<div align="center" style="margin: 10px; margin-top: 20px; margin-bottom: 50px;">
 							<a href="../signup" class="btn btn-lg btn-success">Đăng ký</a>
 							<input type="button" id="loginButton" onclick="login()" value="Đăng nhập" class="btn btn-primary btn-lg">

@@ -7,7 +7,7 @@
 		include 'connectDB.php';
 		mysqli_set_charset($con,'utf8');
 
-		$result = mysqli_query($con,"select maDonHang from hoadon");
+		$result = mysqli_query($con,"select maDonHang from hoadon ORDER by maDonHang");
 		$row = mysqli_num_rows($result);
 		while($lastCode = mysqli_fetch_array($result))
 		{
@@ -20,7 +20,7 @@
 		{
 			$maSP = $sp['maSP'];
 			$gia = $sp['gia'];
-			$sql = "insert into hoadon(maDonHang,maTK,tongTien,tinhTrang) values($nextCode,$maKH, $gia, 1)";
+			$sql = "insert into hoadon(maDonHang,maTK,tongTien,tinhTrang) values($nextCode,$maKH, $gia, 0)";
 			mysqli_query($con, $sql);
 			$sql = "insert into hoadonchitiet(maDonHang,maSP,gia,soluong) values($nextCode,$maSP, $gia, 1)";
 			mysqli_query($con, $sql);

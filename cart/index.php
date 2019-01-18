@@ -31,15 +31,43 @@ include '../template.php';
 							<td align="center" style="vertical-align: middle;"><?php echo ++$i ?></td>
 							<td align="center" style="vertical-align: middle;"><?php echo $SP['tenSP'];?></td>
 							<td align="center" style="vertical-align: middle;">
-								<input type="tel" id="SL<?php echo $i;?>" name="<?php echo $SP['maSP'] ?>" onkeyup="price<?php echo $i;?>()" style="text-align: center;" size="1" value="<?php echo $value;?>">
+								<input type="tel" id="SL<?php echo $i;?>" name="<?php echo $SP['maSP'] ?>" onkeyup="price<?php echo $i;?>()" style="text-align: center; width: 50px" value="<?php echo $value;?>" class="form-control">
+								<input type="text" style="display: none" name="req">
 							</td>
-							<td align="center" id="gia<?php echo $i;?>" style="vertical-align: middle;"><?php echo $SP['gia']*$value;?></td>
+							<td align="center" id="gia<?php echo $i;?>" style="vertical-align: middle;">
+								<?php echo $SP['gia']*$value;?></td>
 							<td align="center" style="vertical-align: middle;"><a href="../delSP.php?id=<?php echo $SP['maSP'] ?>" class="btn btn-danger">DELETE</a></td>
 							<script type="text/javascript">
 							function price<?php echo $i;?>()
 							{
-							var gia = <?php echo $SP['gia'] ?>;
-							document.getElementById("gia<?php echo $i;?>").innerHTML = parseInt(document.getElementById("SL<?php echo $i;?>").value) * gia;
+								var maSP = <?php echo $SP['maSP'] ?>;
+								var gia = <?php echo $SP['gia'] ?>;
+								document.getElementById("sumTR").innerHTML = "";
+								var sl = parseInt(document.getElementById("SL<?php echo $i;?>").value);
+								document.getElementById("gia<?php echo $i;?>").innerHTML = sl * gia;
+
+								if (isNaN(sl)) { 
+									document.getElementById("SL<?php echo $i;?>").value = '1';
+									var sl = parseInt(document.getElementById("SL<?php echo $i;?>").value);
+									document.getElementById("gia<?php echo $i;?>").innerHTML = sl * gia;
+									price<?php echo $i;?>();
+								}
+								if (window.XMLHttpRequest) {
+									// code for IE7+, Firefox, Chrome, Opera, Safari
+									xmlhttp=new XMLHttpRequest();
+								}
+								else
+								{  // code for IE6, IE5
+									xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+								}
+								xmlhttp.onreadystatechange=function() {
+									if (this.readyState==4 && this.status==200) {
+
+										document.getElementById("sumTR").innerHTML=this.responseText;
+									}
+								}
+								xmlhttp.open("GET","updateCart.php?"+maSP+"="+sl+"&req");
+								xmlhttp.send();
 							}
 							</script>
 						</tr>
@@ -48,28 +76,28 @@ include '../template.php';
 							$sumPrice += $SP['gia']*$value;
 						}
 						?>
-						<tr>
-							<td colspan="2" align="center" style="vertical-align: middle;font-weight: bold">
-								Tong
+						<tr id="sumTR">
+							<td colspan='2' align='center' style='vertical-align: middle;font-weight: bold'>
+								Tổng
 							</td>
-							<td align="center" style="vertical-align: middle;font-weight: bold">
-								<span id="sumSL"></span>
-								<script type="text/javascript">
+							<td align='center' style='vertical-align: middle;font-weight: bold'>
+								<span id='sumSL'></span>
+								<script type='text/javascript'>
 								var sl = <?php echo $sumSL ?>;
-								document.getElementById("sumSL").innerHTML = sl;
+								document.getElementById('sumSL').innerHTML = sl;
 								</script>
 							</td>
-							<td align="center" style="vertical-align: middle;font-weight: bold">
-								<span id="sumPrice" name="sumPrice"></span>
-								<script type="text/javascript">
+							<td align='center' style='vertical-align: middle;font-weight: bold'>
+								<span id='sumPrice' name='sumPrice'></span>
+								<script type='text/javascript'>
 								var pr = <?php echo $sumPrice ?>;
-								document.getElementById("sumPrice").innerHTML = pr;
+								document.getElementById('sumPrice').innerHTML = pr;
 								</script>
 							</td>
 							<td></td>
 						</tr>
 					</table>
-					<input type="submit" class="btn btn-lg btn-primary" value="Cập nhật">
+					<!-- <input type="submit" class="btn btn-lg btn-primary" value="Cập nhật"> -->
 					<script type="text/javascript">
 						function buy()
 						{
@@ -104,7 +132,7 @@ include '../template.php';
 		</div>
 	</div>
 </div>
-<div id="footer">
+<div id="footer" style="position: fixed;bottom: 0">
 	Lương Minh Đức - Vũ Văn Toàn
 </div>
 </div>

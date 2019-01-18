@@ -15,13 +15,28 @@
 		else
 		{
 			while ($USER = mysqli_fetch_array($result)) {
-				$_SESSION['nameAD'] = $USER['tenTK'];
-				echo $_SESSION['nameAD'];
-				$_SESSION['idAD'] = $USER['maTK'];
-				echo $_SESSION['idAD'];
+				$name = $USER['tenTK'];
+				echo $name;
+				$id = $USER['maTK'];
+				echo $id;
+				$maQuyen = $USER['maQuyen'];
+				echo $maQuyen;
+				$stat = $USER['trangthai'];
+				echo $stat;
 			}
-			header("location: home.php");
-			mysqli_close($con);
+			if($stat)
+			{
+				$_SESSION['nameAD'] = $name;
+				$_SESSION['idAD'] = $id;
+				$_SESSION['quyenAD'] = $maQuyen;
+				mysqli_close($con);
+				header("location: home.php");
+			}
+			else
+			{
+				mysqli_close($con);
+				header("location: index.php?err=2");
+			}
 		}
 	}
 	// else header("location: index.php");

@@ -23,7 +23,7 @@ include '../template.php';
 								{
 									?>
 										<div class="alert alert-info">
-										    <strong>Thành công!</strong> Mật khẩuđã được thay đổi
+										    <strong>Thành công!</strong> Mật khẩu đã được thay đổi
 										</div>
 									<?php
 								}
@@ -93,10 +93,17 @@ include '../template.php';
 										<th width="70px"></th>
 									</tr>
 									<?php 
-										$result = mysqli_query($con, "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang` FROM `hoadon` where maTK = $idKH");
+										$result = mysqli_query($con, "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,loaiGiaoDich FROM `hoadon` where maTK = $idKH");
 										while($DH = mysqli_fetch_array($result))
 										{
 											?>
+											<script type="text/javascript">
+												function go<?php echo $DH["maDonHang"] ?>()
+												{
+
+													window.open('details.php?id=<?php echo $DH["maDonHang"] ?>', 'example', 'width=800,height=400');
+												}
+											</script>
 											<tr>
 												<td  style="vertical-align: middle;">
 													<?php echo $DH["maDonHang"] ?>
@@ -108,10 +115,15 @@ include '../template.php';
 													<?php echo $DH["tongTien"] ?>
 												</td>
 												<td  style="vertical-align: middle;">
-													<?php echo $DH["tinhTrang"]? "Success":"Canceled" ?>
+													<?php
+														if($DH["tinhTrang"] == 0) echo "Chưa duyệt";
+														else if($DH["tinhTrang"] == 1 && $DH["loaiGiaoDich"] == 0) echo "<b>Đã duyệt</b>";
+														else if($DH["tinhTrang"] == 1 && $DH["loaiGiaoDich"] == 1) echo "<b><i>Đang thuê</i></b>";
+														else if($DH["tinhTrang"] == 2) echo "Đã hủy";
+														else if($DH["tinhTrang"] == 3) echo "Thuê xong"?>
 												</td>
 												<td  style="vertical-align: middle;">
-													<input type="button" class="btn btn-primary" value="Chi tiet" name="">
+													<input type="button" class="btn btn-primary" value="Chi tiet" onclick="go<?php echo $DH["maDonHang"] ?>()">
 												</td>
 											</tr>
 											<?php
@@ -120,13 +132,13 @@ include '../template.php';
 								</table>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" id="closeModal" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
 				</div>
 		</div>
-		<div id="footer">
+		<div id="footer" style="position: fixed;bottom: 0">
 			Lương Minh Đức - Vũ Văn Toàn
 		</div>
 	</div>

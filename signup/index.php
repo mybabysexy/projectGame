@@ -4,6 +4,23 @@ include '../template.php';
 <div id="body">
 	<div>
 		<div align="center">
+			<div id="notifyTK" style="opacity: 1; transition: 0.5s opacity">
+				<?php 
+					if(isset($_GET['c'])) {
+						if($_GET['c'] == 0)
+						{
+							?>
+								<div class="alert alert-danger">
+								    <strong>Oops!</strong> Tên tài khoản / SDT hoặc email đã được sử dụng
+								</div>
+							<?php
+						}
+				}
+				?>
+			</div>
+		</div>
+
+		<div align="center">
 			<h1 id="header" style="margin: 50px">- Đăng ký tài khoản -</h1>
 		</div>
 		<form action="../signup/dangky.php" method="POST" class="form-group">

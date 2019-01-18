@@ -56,7 +56,6 @@
 				</div>
 				<form action="dangnhap.php" method="POST" class="form-group">
 					<div align="center">
-					
 						<div class="form-group" style="margin: 10px;">
 							<input type="text" id="name" name="username" class="form-control" style="width: 250px" placeholder="username" required>
 						</div>
@@ -64,10 +63,11 @@
 							<input type="password" id="pass" name="password" class="form-control" style="width: 250px" placeholder="password" required>
 						</div>
 						<div align="center" style="margin: 10px; margin-top: 20px">
-							<span id="errLogin" style="color: red"></span>
+							<span id="errLogin" style="color: red; font-weight: bold"></span>
 						</div>
 						<?php 
 							if(isset($_GET['err']))
+							{
 								if($_GET['err'] == 1) {
 									?>
 										<script type="text/javascript">
@@ -75,6 +75,14 @@
 										</script>
 									<?php
 								}
+								if($_GET['err'] == 2) {
+									?>
+										<script type="text/javascript">
+											document.getElementById("errLogin").innerHTML = "Tài khoản đã bị khóa do láo nháo";
+										</script>
+									<?php
+								}
+							}	
 							?>
 						<div align="center" style="margin: 10px; margin-top: 20px;">
 							<input type="button" id="loginButton" onclick="login()" value="Đăng nhập" class="btn btn-primary btn-lg">

@@ -2,25 +2,43 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Nhóm 7 - Game Store</title>
+	<title>
+		<?php 
+			if(isset($_GET['page']))
+			{
+				echo "Duc Toan Gaming - Trang ".$_GET['page'];
+			}
+			else
+			{
+				echo "Duc Toan Gaming";
+			}
+		?>
+	</title>
 	<link rel="icon" type="image/png" href="favicon.ico">
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- <script src="https://github.com/livereload/livereload-js/raw/master/dist/livereload.js?host=localhost"></script> -->
 
 	<style type="text/css">
 		body {margin: 0; padding: 0; font-family: sans-serif;}
 		#head {height: 150px}
 		#topbar {display: flex; align-items: center; height: 30%; background-color: cyan;}
 		#menu {height: 70%; display: flex; align-items: center; background-color: darkviolet}
-		#banner {height: 600px; background-color: red}
+		#banner {height: 300px; background-color: red}
 		#listGame {display: grid; align-items: center; justify-content: center}
 		#searchBar {height: 105px; width: 100% ; background-color: white; position: absolute; top: 45px; display: none; align-items: center;}
 		#searchButton {position: absolute; right: 50px; border: 3px solid white; color: white; border-radius: 25px; background-color: transparent; width: 120px; height: 50px; z-index: 1; font-size: 20px; cursor: pointer;}
-		#cartButton {position: absolute; right: 200px; border: 3px solid white; color: white; border-radius: 25px; background-color: transparent; width: 120px; height: 50px; font-size: 20px; cursor: pointer; z-index: 0}
+		#livesearch {width: 511px ; background-color: white; position: absolute; top: 150px; align-items: center; z-index: 1;margin-left: 50px}
+		#cartButton {position: absolute; right: 200px; border: 3px solid white; color: white; border-radius: 25px; background-color: transparent; padding: 0 20px; height: 50px; font-size: 20px; cursor: pointer; z-index: 0}
+
+		#cartWidget {position: fixed; width: 50px; height: 80px; right: 0; top: 50vh; background-color: red; z-index: 1; display: none;}
 
 		.spName {font-size: 18px; margin: 8px; font-weight: bold}
 		.spPrice {font-size: 20px; font-weight: bolder; color: brown}
@@ -51,13 +69,14 @@
 		background: #88ba1c;  
 		}
 	</style>
-	<script type="text/javascript">
+	<script>
 		searchBarState = 0;
 		function showSearchBar()
 		{
 			if(searchBarState == 1)
 			{
 				document.getElementById('searchBar').style.display="none";
+				document.getElementById('livesearch').style.display="none";
 				document.getElementById('searchButton').style.border="3px solid white";
 				document.getElementById('searchButton').style.color="white";
 				document.getElementById('searchButton').value="Tìm kiếm";
@@ -65,6 +84,7 @@
 			}
 			else {
 				document.getElementById('searchBar').style.display="flex";
+				document.getElementById('livesearch').style.display="block";
 				document.getElementById('searchButton').style.border="3px solid red";
 				document.getElementById('searchButton').style.color="red";
 				document.getElementById('searchButton').value="Đóng lại";
@@ -238,18 +258,32 @@
 			}
 			if(check == 2) document.getElementById("loginButton").type= 'submit';
 		}
+		function cartWidget()
+		{
+
+		}
 	</script>
 </head>
 <body>
 	<?php
 		include 'connectDB.php';
 		mysqli_set_charset($con,'utf8');
-		if(isset($_SESSION['cartItem']));
+		if(isset($_SESSION['cartItem']))
+		{
+			$sumSL = 0;
+			$sumPrice = 0;
+			foreach ($_SESSION['cartItem'] as $key => $value) {
+				$sumSL += $value;
+			}
+		}
 		else
 			$_SESSION['cartItem'] = array();
 		$row = 0;
 	?>
 	<div id="main">
+		<div id="cartWidget">
+			
+		</div>
 		<div id="head">
 			<div id="topbar">
 				<div style="width: 70%; height: 100%; display: flex; align-items: center;">
@@ -290,14 +324,43 @@
 				<script type="text/javascript">
 					function gotoCart()
 					{
-						window.location.href="../cart/"
+						window.location.href="../cart/";
 					}
+					$(function(){
+						var gh = "Giỏ hàng" + "<?php if($sumSL > 0) echo " <span class='label label-success'>".$sumSL."</span>" ?>";
+						$("#cartButton").html(gh);
+					})
 				</script>
-				<input type="button" id="cartButton" onclick="gotoCart()" value="Giỏ hàng">
+				<!-- <input type="button" id="cartButton" onclick="gotoCart()" value=""> -->
+				<button type="button" id="cartButton" onclick="gotoCart()">
+					
+				</button>
 			</div>
 		</div>
 		<div id="searchBar">
+			<script>
+				function showResult(str) {
+				if (str.length == 0) { 
+					document.getElementById("livesearch").innerHTML="";
+					return;
+				}
+				if (window.XMLHttpRequest) {
+					// code for IE7+, Firefox, Chrome, Opera, Safari
+					xmlhttp=new XMLHttpRequest();
+				} else {  // code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					if (this.readyState==4 && this.status==200) {
+						document.getElementById("livesearch").innerHTML=this.responseText;
+					}
+				}
+				xmlhttp.open("GET","../search.php?q="+str,true);
+				xmlhttp.send();
+				}
+			</script>
 			<form action="../">
-				<input type="text" name="q" placeholder="NHẬP ÍT NHẤT 3 KÍ TỰ" style="background-color: transparent; border: none; border-bottom: 2px solid black; height: 50px; font-size: 40px; margin-left: 50px">
+				<input type="text" name="q" onkeyup="showResult(this.value)" placeholder="NHẬP ÍT NHẤT 3 KÍ TỰ" style="background-color: transparent; border: none; border-bottom: 2px solid black; height: 50px; font-size: 40px; margin-left: 50px">
 			</form>
 		</div>
+		<div id="livesearch"></div>

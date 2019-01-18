@@ -5,6 +5,9 @@
 		include '../connectDB.php';
 		$pass = $_POST['password'];
 		$id = $_SESSION['idKH'];
+
+		$pass = password_hash($pass, PASSWORD_DEFAULT);
+
 		mysqli_set_charset($con, 'utf8');
 		if(mysqli_query($con, " update tkuser set matKhau = '$pass' where maTK = $id "))
 		{
