@@ -44,7 +44,6 @@
 			xmlhttp.send();
 		},500);
 	</script>
-
 </head>
 <body>
 	<div class="container">

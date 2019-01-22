@@ -37,7 +37,7 @@
 								}
 								function go<?php echo $sp['maSP'] ?>()
 								{
-									window.location.href="addtocart.php?id=<?php echo $sp['maSP'] ?>&fwd";
+									window.location.href="../addtocart.php?id=<?php echo $sp['maSP'] ?>&fwd";
 								}
 								$(function(){
 									$('#sl').blur(function(){

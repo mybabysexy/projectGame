@@ -1,5 +1,9 @@
 <?php
-	$response = "<tr><th align='center'>Không có tài khoản nào :) F5 lại trang để thấy thay đổi</th></tr>";
+	$response = "<tr>
+					<th align='center'>
+						Không có tài khoản nào :) F5 lại trang để thấy thay đổi
+					</th>
+				</tr>";
 	$timeLeft = "";
 	require_once('../connectDB.php');
 	$sql = "select * from (SELECT `maDonHang`, `ngaydathang`,hanSuDung,tinhTrang, tkuser.tenKH, CURRENT_TIMESTAMP as now,(timediff(hanSuDung, CURRENT_TIMESTAMP())) as timeLeft FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK order by ngaydathang asc)a where a.tinhTrang = 1";
