@@ -38,6 +38,20 @@ include '../template.php';
 								<?php echo $SP['gia']*$value;?></td>
 							<td align="center" style="vertical-align: middle;"><a href="../delSP.php?id=<?php echo $SP['maSP'] ?>" class="btn btn-danger">DELETE</a></td>
 							<script type="text/javascript">
+								$(function(){
+									$('#SL<?php echo $i;?>').blur(function(){
+										if($('#SL<?php echo $i;?>').val().length == 0)
+										{
+											$('#SL<?php echo $i;?>').val(1);
+										}
+										else if($('#SL<?php echo $i;?>').val() > parseInt(<?php echo $SP['soLuong'];?>))
+										{
+											alert("Chỉ còn "+ parseInt(<?php echo $SP['soLuong'];?>) +" mã game thôi bạn!");
+											$('#SL<?php echo $i;?>').val(parseInt(<?php echo $SP['soLuong'];?>));
+											price<?php echo $i;?>();
+										}
+									})
+								})
 							function price<?php echo $i;?>()
 							{
 								var maSP = <?php echo $SP['maSP'] ?>;

@@ -13,22 +13,42 @@
 		}
 		echo ++$nextCode;
 
-		$sumPrice = 0;
-		foreach ($_SESSION['cartItem'] as $key => $value) {
-			$back = mysqli_query($con, "Select * from sanpham where maSP = $key");
-			$SP = mysqli_fetch_array($back);
-			$sumPrice += $SP['gia']*$value;
+		$rentTime = $_GET['rentTime']; //hour
+		
+		if ($rentTime < 4) {
+			$result = mysqli_query($con,"select * from giaThue where loaiGia = 1 order by loaiGia");
+			$giaRent = mysqli_fetch_array($result);
+			$giaThue = $giaRent['gia'];
+		}
+		else if ($rentTime < 12) {
+			$result = mysqli_query($con,"select * from giaThue where loaiGia = 2 order by loaiGia");
+			$giaRent = mysqli_fetch_array($result);
+			$giaThue = $giaRent['gia'];
+		}
+		else if ($rentTime < 48) {
+			$result = mysqli_query($con,"select * from giaThue where loaiGia = 3 order by loaiGia");
+			$giaRent = mysqli_fetch_array($result);
+			$giaThue = $giaRent['gia'];
+		}
+		else{
+			$result = mysqli_query($con,"select * from giaThue where loaiGia = 4 order by loaiGia");
+			$giaRent = mysqli_fetch_array($result);
+			$giaThue = $giaRent['gia'];
 		}
 
-		$rentTime = $_GET['rentTime'];
-		$rentMoney = $rentTime * 3000;
+		$rentMoney = $rentTime * $giaThue;
+
+		$sumPrice = 0;
+		foreach ($_SESSION['cartItem'] as $key => $value) {
+			$sumPrice += ($rentMoney*$value);
+		}
 
 		echo " - ";
 		echo $rentTime;
 		echo " - ";
-		echo $rentMoney;
+		echo $sumPrice;
 
-		$sql = "insert into hoadon(maDonHang,maTK,tongTien,tinhTrang,loaiGiaoDich) values($nextCode,$maKH, $rentMoney, 0, 1)";
+		$sql = "insert into hoadon(maDonHang,maTK,tongTien,tinhTrang,loaiGiaoDich) values($nextCode,$maKH, $sumPrice, 0, 1)";
 		mysqli_query($con, $sql);
 
 		foreach ($_SESSION['cartItem'] as $key => $value) 
@@ -40,7 +60,7 @@
 			{
 				$maSP = $sp['maSP'];
 				$gia = $sp['gia'];
-				$sql = "insert into hoadonchitiet(maDonHang,maSP,gia,soluong) values($nextCode,$maSP, $rentMoney, $sl)";
+				$sql = "insert into hoadonchitietthue(maDonHang,maSP,gia,soluong) values($nextCode,$maSP, $rentMoney, $sl)";
 				mysqli_query($con, $sql);
 			}
 		}

@@ -14,7 +14,7 @@
 							<script type="text/javascript">
 								function add<?php echo $sp['maSP'] ?>tocart()
 								{
-									alert("Thêm thành công");
+									//alert("Thêm thành công");
 									var sl = parseInt(document.getElementById("sl").value);
 									if (isNaN(sl)) { 
 										document.getElementById("sl").value = '1';
@@ -45,6 +45,13 @@
 										{
 											$('#sl').val(1);
 										}
+										else if($('#sl').val() > parseInt($('#soLuong').text()))
+										{
+											alert("Chỉ còn "+ parseInt($('#soLuong').text()) +" mã game thôi bạn!");
+											$('#sl').val(parseInt($('#soLuong').text()));
+											$('#cartBtn').attr("onclick","");
+											add<?php echo $sp['maSP'] ?>tocart();
+										}										
 									})
 								})
 							</script>
@@ -62,13 +69,14 @@
 									Giá: <span class="spPrice"> <?php if($sp["soLuong"] != 0) echo $sp["gia"]; else echo "Hết hàng" ?> </span>
 								</h4>
 									Số lượng: <input type="text" id="sl" style="width: 50px; text-align: center; display: inline-block; margin-bottom: 10px" class="form-control" value="1">
+									 - Còn: <span id="soLuong"><strong><?php echo $sp['soLuong'] ?></strong></span> mã trong kho
 								<br>
 								<?php 
 									if($sp["soLuong"] != 0)
 									{
 										?>
 											<input type="button" class="btn btn-success" value="Thuê ngay" onclick="go<?php echo $sp['maSP'] ?>()">
-											<input type="button" class="btn btn-primary" value="Thêm vào giỏ hàng" onclick="add<?php echo $sp['maSP'] ?>tocart()">
+											<input type="button" id="cartBtn" class="btn btn-primary" value="Thêm vào giỏ hàng" onclick="add<?php echo $sp['maSP'] ?>tocart()">
 											<input type="button" class="btn btn-warning" value="Mua Ngay" onclick="go<?php echo $sp['maSP'] ?>()">
 										<?php
 									}

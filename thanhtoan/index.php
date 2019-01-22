@@ -83,11 +83,43 @@ include '../template.php';
 									</td>
 									<td align="center" style="width: 50%">
 										<label>Giá: </label>
-										<span id="priceRent">3000</span>d
+										<span id="priceRent">3000</span>d/ tài khoản
 										<script type="text/javascript">
 											$(function() {
 												$('#timeRent').change(function() {
-													var price = $('#timeRent').val() * 3000;
+													if ($('#timeRent').val() < 4) {
+														var giaRent = 
+														<?php
+															$result = mysqli_query($con,"select * from giaThue where loaiGia = 1 order by loaiGia");
+															$giaRent = mysqli_fetch_array($result);
+															echo $giaRent['gia'];
+														?>;
+													}
+													else if ($('#timeRent').val() < 12) {
+														var giaRent = 
+														<?php
+															$result = mysqli_query($con,"select * from giaThue where loaiGia = 2 order by loaiGia");
+															$giaRent = mysqli_fetch_array($result);
+															echo $giaRent['gia'];
+														?>;
+													}
+													else if ($('#timeRent').val() < 48) {
+														var giaRent = 
+														<?php
+															$result = mysqli_query($con,"select * from giaThue where loaiGia = 3 order by loaiGia");
+															$giaRent = mysqli_fetch_array($result);
+															echo $giaRent['gia'];
+														?>;
+													}
+													else{
+														var giaRent = 
+														<?php
+															$result = mysqli_query($con,"select * from giaThue where loaiGia = 4 order by loaiGia");
+															$giaRent = mysqli_fetch_array($result);
+															echo $giaRent['gia'];
+														?>;
+													}
+													var price = $('#timeRent').val() * giaRent;
 													$('#priceRent').text(price);
 												});
 											})

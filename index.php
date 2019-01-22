@@ -130,7 +130,7 @@ include 'template.php';
 							{
 								$q = $_GET['q'];
 								$demPage = 1;
-								$sql = "select maSP,tenSP,gia,NSX,theloai.theLoai as theLoai,maAnh from (select maSP,tenSP,gia,maAnh,maTheLoai,nsx.tenNSX as NSX from sanpham inner join nsx on nsx.maNSX=sanpham.maNSX)a inner join theloai on theloai.maTheLoai=a.maTheLoai WHERE tenSP like '%$q%'";
+								$sql = "select maSP,tenSP,gia,NSX,theloai.theLoai as theLoai,maAnh,soLuong from (select maSP,tenSP,gia,maAnh,maTheLoai,soLuong,nsx.tenNSX as NSX from sanpham inner join nsx on nsx.maNSX=sanpham.maNSX)a inner join theloai on theloai.maTheLoai=a.maTheLoai WHERE tenSP like '%$q%'";
 								?>
 								<script type="text/javascript">
 									document.getElementById('banner').style.display="none";
@@ -253,7 +253,7 @@ include 'template.php';
 												if($sp["soLuong"] != 0)
 												{
 													?>
-														<input type="button" class="btn btn-success" value="Thuê ngay" onclick="go<?php echo $sp['maSP'] ?>()">
+														
 														<input type="button" class="btn btn-primary" value="Thêm vào giỏ hàng" onclick="add<?php echo $sp['maSP'] ?>tocart()">
 														<input type="button" class="btn btn-warning" value="Mua Ngay" onclick="go<?php echo $sp['maSP'] ?>()">
 													<?php
@@ -261,7 +261,7 @@ include 'template.php';
 												else
 												{
 													?>
-														<input type="button" class="btn btn-success disabled" value="Thuê ngay">
+														
 														<input type="button" class="btn btn-primary disabled" value="Thêm vào giỏ hàng">
 														<input type="button" class="btn btn-warning disabled" value="Mua Ngay">
 													<?

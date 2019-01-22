@@ -27,6 +27,23 @@
     		}
     	?>
     </script>
+    <script type="text/javascript">
+		setInterval(function ajax() {
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			} else {  // code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function() {
+				if (this.readyState==4 && this.status==200) {
+					document.getElementById("livesearch").innerHTML=this.responseText;
+				}
+			}
+			xmlhttp.open("GET","refreshAcc.php",true);
+			xmlhttp.send();
+		},500);
+	</script>
 
 </head>
 <body>
@@ -90,31 +107,32 @@
 				<th width="100px">SĐT</th>
 				<th width="160px">Email</th>
 				<th width="60px">Thuê/mua</th>
+				<!-- <th width="110px">Hạn SD còn</th> -->
 				<th width="90px">Tổng tiền</th>
 				<th width="80px">Tình Trạng</th>
 				<th width="80px"></th>
 			</tr>
 			<?php 
-				$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK order by ngaydathang desc";
+				$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime,(timediff(hanSuDung, CURRENT_TIMESTAMP())) as timeLeft FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK order by ngaydathang desc";
 				if (isset($_GET['tinhTrang'])) {
 					if($_GET['tinhTrang'] != 999)
 					{
 						$tinhTrang = $_GET['tinhTrang'];
-						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tinhTrang = $tinhTrang order by maDonHang";
+						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime,(timediff(hanSuDung, CURRENT_TIMESTAMP())) as timeLeft FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tinhTrang = $tinhTrang order by maDonHang";
 					}
 				}
 				if (!empty($_GET['maHD'])) {
 					if($_GET['maHD'] > 0)
 					{
 						$maHD = $_GET['maHD'];
-						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where maDonHang = $maHD order by maDonHang";
+						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime,(timediff(hanSuDung, CURRENT_TIMESTAMP())) as timeLeft FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where maDonHang = $maHD order by maDonHang";
 					}
 				}
 				if (!empty($_GET['tenKH'])) {
 					if($_GET['tenKH'] >= 0)
 					{
 						$tenKH = $_GET['tenKH'];
-						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tenKH like '%$tenKH%' order by maDonHang";
+						$sql = "SELECT `maDonHang`, `ngaydathang`, `tongTien`, `tinhTrang`,hanSuDung, loaiGiaoDich, tkuser.tenKH, tkuser.sdt, tkuser.email, tkuser.maTK,hour(timediff(hanSuDung, ngaydathang)) as rentTime,(timediff(hanSuDung, CURRENT_TIMESTAMP())) as timeLeft FROM `hoadon` INNER JOIN tkuser on tkuser.maTK = hoadon.maTK where tenKH like '%$tenKH%' order by maDonHang";
 					}
 				}
 				$result = mysqli_query($con, $sql);
@@ -179,7 +197,6 @@
 								<script type="text/javascript">
 									function go<?php echo $DH["maDonHang"] ?>()
 									{
-
 										window.open('details.php?id=<?php echo $DH["maDonHang"] ?>', 'example', 'width=800,height=400');
 									}
 								</script>
@@ -192,6 +209,13 @@
 				}
 			?>
 		</table>
+		<h2>Tài khoản gần hết hạn</h2>
+		<p><i>- tự động cập nhật tài khoản còn thời gian chơi < 15 phút</i></p>
+		<div>
+			<table id="livesearch" class="table">
+				
+			</table>
+		</div>
 		<p align="center">
 			Admin: <?php echo $_SESSION['nameAD']; ?> - <?php echo $_SESSION['quyenAD']? "Super Admin":"Admin" ?>
 		</p>

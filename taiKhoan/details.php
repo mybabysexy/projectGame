@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Chi tiet</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -30,7 +30,7 @@
 				$slTK = 0;
 				$price = 0;
 				include '../connectDB.php';
-				$sql = "select sanpham.tenSP, hoadonchitiet.soluong, hoadonchitiet.gia from hoadonchitiet INNER JOIN sanpham on sanpham.maSP = hoadonchitiet.maSP where maDonHang = $id";
+				$sql = "select sanpham.tenSP, hoadonchitietthue.soluong, hoadonchitietthue.gia from hoadonchitietthue INNER JOIN sanpham on sanpham.maSP = hoadonchitietthue.maSP where maDonHang = $id";
 				$result = mysqli_query($con, $sql);
 				while ($HD = mysqli_fetch_array($result)) {
 					?>
@@ -90,15 +90,23 @@
 							<?php
 						}
 						if ($stt['loaiGiaoDich'] == 1 && $stt['tinhTrang'] == 1) {
-							$thue = true;
+							$dangThue = true;
+							$daThue = false;
 						}
-						else $thue = false;
+						else if ($stt['loaiGiaoDich'] == 1 && $stt['tinhTrang'] == 3) {
+							$daThue = true;
+							$dangThue = false;
+						}
+						else {
+							$dangThue = false;
+							$daThue = false;
+						}
 					}
 				?>
 			</td>
 		</tr>
 		<?php 
-			if($thue)
+			if($dangThue)
 			{
 				$sql3 = "select * from tkthue where tkThue = $maTK and maHD = $id";
 				//echo $sql3;
@@ -121,6 +129,56 @@
 						</tr>
 					<?php
 				}
+			}
+			if($daThue)
+			{
+				$listTKthue = "";
+				$comma = 0;
+
+				$sql3 = "select * from hoadonchitietthue where maDonHang = $id";
+				//echo $sql4;
+				$result3 = mysqli_query($con, $sql3);
+				while ($rentedAcc = mysqli_fetch_array($result3)) {
+					if ($comma == 0) {
+						$listTKthue = $listTKthue.$rentedAcc['maTKthue'];
+						$comma = 1;
+					}
+					else {
+						$listTKthue .= ",".$rentedAcc['maTKthue'];
+					}
+				}
+
+				//echo $listTKthue;
+				$listTK = explode(',',$listTKthue);
+				// print_r($listTK);
+
+				$listTKthue = "";
+				$comma = 0;
+
+				foreach ($listTK as $key => $maTKthue) {
+					$sql4 = "select * from tkthue where maTK=$maTKthue";
+					// echo $sql4."<br>";
+					$result4 = mysqli_query($con, $sql4);
+					while ($rentedAcc = mysqli_fetch_array($result4)) {
+						if ($comma == 0) {
+							$listTKthue = $listTKthue.$rentedAcc['tenTK'];
+							$comma = 1;
+						}
+						else {
+							$listTKthue .= ", ".$rentedAcc['tenTK'];
+						}
+					}
+				}
+				?>
+					<tr>
+						<td colspan="4">
+							<strong>Tài khoản đã gán: </strong>
+							<span>
+								<?php echo $listTKthue ?>
+							</span>
+						</td>
+					</tr>
+				<?php
 			}
 		?>
 		<tr>
