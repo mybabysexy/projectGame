@@ -34,7 +34,21 @@
 			{
 				$maSP = $sp['maSP'];
 				$gia = $sp['gia'];
-				$sql = "insert into hoadonchitiet(maDonHang,maSP,gia,soluong) values($nextCode,$maSP, $gia, $sl)";
+				$keyGame = "";
+				$comma = 0;
+				for ($i=0; $i < $sl; $i++) { 
+					$keyGameGen = strtoupper(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5)."-".
+			                substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5)."-".
+			                substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5));
+					if ($comma == 0) {
+						$keyGame .= $keyGameGen;
+						$comma = 1;
+					}
+					else {
+						$keyGame .= "/".$keyGameGen;
+					}
+				}
+				$sql = "insert into hoadonchitiet(maDonHang,maSP,gia,soluong,keyGame) values($nextCode,$maSP, $gia, $sl,'$keyGame')";
 				mysqli_query($con, $sql);
 				$slton = $sp['soLuong'] - $sl;
 				$sql = "update sanpham set soLuong = $slton where maSP = $maSP";

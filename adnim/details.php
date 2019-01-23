@@ -22,6 +22,7 @@
 			<th>SL</th>
 			<th>Gia</th>
 			<th>Tong</th>
+			<th>Key</th>
 		</tr>
 		<?php 
 			if (isset($_GET['id'])) {
@@ -34,7 +35,7 @@
 				$result = mysqli_query($con, $sql);
 				if(mysqli_num_rows($result) == 0)
 				{
-					$sql = "select sanpham.tenSP, hoadonchitiet.soluong, hoadonchitiet.gia from hoadonchitiet INNER JOIN sanpham on sanpham.maSP = hoadonchitiet.maSP where maDonHang = $id";
+					$sql = "select sanpham.tenSP, hoadonchitiet.soluong, hoadonchitiet.gia,hoadonchitiet.keyGame from hoadonchitiet INNER JOIN sanpham on sanpham.maSP = hoadonchitiet.maSP where maDonHang = $id";
 					$result = mysqli_query($con, $sql);
 				}
 				while ($HD = mysqli_fetch_array($result)) {
@@ -52,6 +53,10 @@
 							<td>
 								<?php echo $HD['gia']*$HD['soluong']; $price+=$HD['gia']*$HD['soluong']; ?>
 							</td>
+							<td>
+								<?php if(isset($HD['keyGame'])) $keyGame = $HD['keyGame'] ?>
+								<span id="keyGame"></span>
+							</td>
 						</tr>
 					<?php
 				}
@@ -68,14 +73,14 @@
 			<th>
 				<?php echo $sl ?>
 			</th>
-			<th colspan="2">
+			<th colspan="3">
 				<center>
 					<?php echo $price ?>
 				</center>
 			</th>
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="5">
 				<?php 
 					$sql = "select * from hoadon where maDonHang = $id";
 					$result = mysqli_query($con, $sql);
@@ -92,6 +97,15 @@
 									}
 								</script>
 								<input type="button" onclick="cancel()" value="Hủy đơn hàng" class="btn btn-block btn-danger">
+							<?php
+						}
+						if ($stt['loaiGiaoDich'] == 0 && $stt['tinhTrang'] == 1) {
+							?>
+							<script type="text/javascript">
+								$(function(){
+									$("#keyGame").text('<?php echo $keyGame; ?>');
+								})
+							</script>
 							<?php
 						}
 						if ($stt['loaiGiaoDich'] == 1 && $stt['tinhTrang'] == 1) {
@@ -136,7 +150,7 @@
 				}
 				?>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<a href="resetTKthue.php?id=<?php echo $id;?>" class="btn btn-danger btn-block">Gỡ tài khoản đang thuê</a>
 					</td>
 				</tr>
@@ -195,7 +209,7 @@
 		?>
 		
 		<tr>
-			<td colspan="4">
+			<td colspan="5">
 				<input type="button" class="btn btn-warning btn-block" value="Đóng cửa sổ" onclick="window.close()" >
 			</td>
 		</tr>
