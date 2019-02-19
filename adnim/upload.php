@@ -36,9 +36,6 @@ if (isset($_POST['id']))
             echo "Sorry, there was an error uploading your file.";
         }
     }
-    ?>
-    
-    <?
 }
 else
 {

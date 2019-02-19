@@ -8,12 +8,11 @@ include 'template.php';
 				<ol class="carousel-indicators">
 				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 				</ol>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox" style="height: 300px">
 					<div class="item active">
-						<img src="banner.png"  style="height: 300px">
+						<img src="banner2.png"  style="height: 300px">
 					</div>
 					<div class="item">
 						<img src="banner.png"  style="height: 300px">

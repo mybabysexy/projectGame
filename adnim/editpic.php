@@ -3,10 +3,7 @@
 <head>
 	<title></title>
 	<script type="text/javascript">
-
 	    function PreviewImage() {
-	        
-
 	        var a = document.getElementById("fileToUpload");
 			if (a.files.length == 0) {
 				alert("choose");
@@ -52,7 +49,7 @@
 			<div>
 				<input type="text" name="id" value="<?php echo $_GET['id']; ?>" style="display: none">
 			    <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" onchange="PreviewImage()">
-			    <input type="button" value="Upload Image" name="submit" id="uploadFile" class="form-control"">
+			    <input type="button" value="Upload Image" id="uploadFile" class="form-control"">
 	    	</div>
 	    	<div style="margin-top: 20px">
 	    		<h4 style="text-align: left;">Preview:</h4>
