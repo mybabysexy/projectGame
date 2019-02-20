@@ -258,10 +258,6 @@
 			}
 			if(check == 2) document.getElementById("loginButton").type= 'submit';
 		}
-		function cartWidget()
-		{
-
-		}
 	</script>
 </head>
 <body>
@@ -321,6 +317,11 @@
 					<img src="../logo.png" width="100px">
 				</a>
 				<input type="button" id="searchButton" onclick="showSearchBar()" value="Tìm kiếm">
+				
+				<!-- <input type="button" id="cartButton" onclick="gotoCart()" value=""> -->
+				<button type="button" id="cartButton" onclick="gotoCart()">
+					
+				</button>
 				<script type="text/javascript">
 					function gotoCart()
 					{
@@ -331,10 +332,6 @@
 						$("#cartButton").html(gh);
 					})
 				</script>
-				<!-- <input type="button" id="cartButton" onclick="gotoCart()" value=""> -->
-				<button type="button" id="cartButton" onclick="gotoCart()">
-					
-				</button>
 			</div>
 		</div>
 		<div id="searchBar">

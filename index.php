@@ -263,7 +263,7 @@ include 'template.php';
 														
 														<input type="button" class="btn btn-primary disabled" value="Thêm vào giỏ hàng">
 														<input type="button" class="btn btn-warning disabled" value="Mua Ngay">
-													<?
+													<?php
 												}
 											?>
 											
