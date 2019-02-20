@@ -1,7 +1,7 @@
 <?php session_start();
 include '../template.php';
 ?>
-<div id="body">
+<div id="body" onload="checkCart()">
 	<div>
 		<div align="center">
 			<h1 id="header" style="margin: 50px">- Giỏ hàng -</h1>
@@ -32,7 +32,7 @@ include '../template.php';
 							<td align="center" style="vertical-align: middle;"><?php echo $SP['tenSP'];?></td>
 							<td align="center" style="vertical-align: middle;">
 								<input type="tel" id="SL<?php echo $i;?>" name="<?php echo $SP['maSP'] ?>" onkeyup="price<?php echo $i;?>()" style="text-align: center; width: 50px" value="<?php echo $value;?>" class="form-control">
-								<input type="text" style="display: none" name="req">
+								<input type="text" style="display: none;" id="SLT<?php echo $i;?>" value="<?php echo $SP['soLuong'];?>">
 							</td>
 							<td align="center" id="gia<?php echo $i;?>" style="vertical-align: middle;">
 								<?php echo $SP['gia']*$value;?></td>
@@ -111,25 +111,51 @@ include '../template.php';
 							<td></td>
 						</tr>
 					</table>
-					<!-- <input type="submit" class="btn btn-lg btn-primary" value="Cập nhật"> -->
+					<input type="submit" id="submitBtn" style="display: none" class="btn btn-lg btn-primary" value="Cập nhật">
 					<script type="text/javascript">
 						function buy()
 						{
-					<?php
-					if(isset($_SESSION['nameKH']))
-					{
-					?>
-					if(confirm("Chắc chắn chứ?")) window.location.href = "../thanhtoan/";
-					<?php
-					}
-					else
-					{
-					?>
-					alert("Hiện tại hệ thống chưa hỗ trợ thanh toán vãng lai, hãy đăng nhập để sử dụng chức năng này");
-					<?php
-					}
-					?>
-					}
+							<?php
+								if(isset($_SESSION['nameKH']))
+								{
+									?>
+										//if(confirm("Chắc chắn chứ?")) window.location.href = "../thanhtoan/";
+										$(function(){
+											var checkCart = 0;
+											for(var i = 1;;i++)
+											{
+												if ($('#SL'+i).val() == undefined) {
+													console.log(i+" Err");
+													break;
+												}
+												else if($('#SL'+i).val().length == 0)
+												{
+													$('#SL'+i).val(1);
+												}
+												else if($('#SL'+i).val() > $('#SLT'+i).val())
+												{
+													$('#SL'+i).val($('#SLT'+i).val());
+													console.log(i+" Fixed");
+													checkCart = 1;
+												}
+												console.log(i+" Next");
+											}
+											$('#submitBtn').click();
+
+											if (checkCart == 0) {
+												if(confirm("Chắc chắn chứ?")) window.location.href = "../thanhtoan/";
+											}
+										})
+									<?php
+								}
+								else
+								{
+									?>
+										alert("Hiện tại hệ thống chưa hỗ trợ thanh toán vãng lai, hãy đăng nhập để sử dụng chức năng này");
+									<?php
+								}
+							?>
+						}
 					</script>
 					<input type="button" class="btn btn-lg btn-success" value="Xác nhận" onclick="buy()" id="thanhtoanbtn">
 				</div>
@@ -150,5 +176,30 @@ include '../template.php';
 	Lương Minh Đức - Vũ Văn Toàn
 </div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		var click = 0;
+		for(var i = 1;;i++)
+		{
+			if ($('#SL'+i).val() == undefined) {
+				console.log(i+" Err");
+				break;
+			}
+			else if($('#SL'+i).val().length == 0)
+			{
+				$('#SL'+i).val(1);
+			}
+			else if(parseInt($('#SL'+i).val()) > parseInt($('#SLT'+i).val()))
+			{
+				$('#SL'+i).val($('#SLT'+i).val());
+				console.log(i+" Fixed");
+				click = 1;
+			}
+			console.log(i+" Next");
+		}
+		console.log("Out");
+		if(click != 0) $('#submitBtn').click();
+	})
+</script>
 </body>
 </html>
