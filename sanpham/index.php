@@ -41,7 +41,7 @@
 								}
 								$(function(){
 									$('#sl').blur(function(){
-										if($('#sl').val().length == 0)
+										if($('#sl').val().length == 0 || parseInt($('#sl').val()) <= 0)
 										{
 											$('#sl').val(1);
 										}

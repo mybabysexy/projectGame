@@ -185,7 +185,7 @@ include '../template.php';
 				console.log(i+" Err");
 				break;
 			}
-			else if($('#SL'+i).val().length == 0)
+			else if($('#SL'+i).val().length == 0 || parseInt($('#SL'+i).val()) <= 0 )
 			{
 				$('#SL'+i).val(1);
 			}
