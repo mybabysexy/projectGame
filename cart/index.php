@@ -35,19 +35,21 @@ include '../template.php';
 								<input type="text" style="display: none;" id="SLT<?php echo $i;?>" value="<?php echo $SP['soLuong'];?>">
 							</td>
 							<td align="center" id="gia<?php echo $i;?>" style="vertical-align: middle;">
-								<?php echo $SP['gia']*$value;?></td>
+								<?php echo addDot($SP['gia']*$value);?>
+								</td>
 							<td align="center" style="vertical-align: middle;"><a href="../delSP.php?id=<?php echo $SP['maSP'] ?>" class="btn btn-danger">DELETE</a></td>
 							<script type="text/javascript">
 								$(function(){
 									$('#SL<?php echo $i;?>').blur(function(){
-										if($('#SL<?php echo $i;?>').val().length == 0)
+										if($('#SL<?php echo $i;?>').val().length == 0 || $('#SL<?php echo $i;?>').val() <= 0)
 										{
 											$('#SL<?php echo $i;?>').val(1);
+											price<?php echo $i;?>();
 										}
-										else if($('#SL<?php echo $i;?>').val() > parseInt(<?php echo $SP['soLuong'];?>))
+										else if($('#SL<?php echo $i;?>').val() > 5)
 										{
-											alert("Chỉ còn "+ parseInt(<?php echo $SP['soLuong'];?>) +" mã game thôi bạn!");
-											$('#SL<?php echo $i;?>').val(parseInt(<?php echo $SP['soLuong'];?>));
+											alert("Chỉ được phép đặt 5 game thôi bạn!");
+											$('#SL<?php echo $i;?>').val(5);
 											price<?php echo $i;?>();
 										}
 									})
@@ -172,6 +174,25 @@ include '../template.php';
 		</div>
 	</div>
 </div>
+<?php 
+    function addDot($strNum) {
+        $len = strlen($strNum);
+        $chia000 = 3;
+        $ketqua = "";
+        while ($len - $chia000 >= 0)
+        {
+            $cutString = substr($strNum, $len - $chia000 , 3);
+            $ketqua = ','.$cutString.$ketqua;
+            $chia000+= 3;
+        }
+        $cutString = substr($strNum, 0 , 3 - ($chia000 - $len) );
+        $ketqua = $cutString.$ketqua;
+        if(substr($ketqua,0,1)==','){
+            $ketqua=substr($ketqua,1,$len+2);   
+        }
+        return $ketqua;
+	}
+?>
 <div id="footer" style="position: fixed;bottom: 0">
 	Lương Minh Đức - Vũ Văn Toàn
 </div>
@@ -191,7 +212,7 @@ include '../template.php';
 			}
 			else if(parseInt($('#SL'+i).val()) > parseInt($('#SLT'+i).val()))
 			{
-				$('#SL'+i).val($('#SLT'+i).val());
+				$('#SL'+i).val(5);
 				console.log(i+" Fixed");
 				click = 1;
 			}

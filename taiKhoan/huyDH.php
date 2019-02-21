@@ -4,7 +4,7 @@
 
 		$id = $_GET['id'];
 
-		$sql = "update hoadon set tinhTrang = 2 where maDonHang = $id";
+		$sql = "update hoadon set tinhTrang = 2 where maDonHang = $id and tinhTrang != 1";
 		mysqli_query($con, $sql);
 
 		mysqli_close($con);
