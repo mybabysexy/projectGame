@@ -123,9 +123,9 @@
 												window.location.href="deltheloai.php?id=<?php echo $DH["maTheLoai"]; ?>";
 										}
 									</script>
-									<button type="button" class="btn btn-danger" onclick="deltheloai<?php echo $DH["maTheLoai"]; ?>()" style="margin-left: 10px; width: 120px">
+									<!-- <button type="button" class="btn btn-danger" onclick="deltheloai<?php echo $DH["maTheLoai"]; ?>()" style="margin-left: 10px; width: 120px">
 										<span class="glyphicon glyphicon-remove-sign"></span> Xoa
-									</button>
+									</button> -->
 								</td>
 								<?
 							}

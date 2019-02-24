@@ -331,7 +331,7 @@
 									?>
 									<td>
 										<?php 
-											if(true)
+											if($_SESSION['idAD'] != $DH["maTK"])
 											{
 												if($DH["maQuyen"])
 												{
@@ -371,14 +371,14 @@
 											else
 											{
 												?>
-													<span><?php echo $DH["trangthai"] ?></span>
+													<span></span>
 												<?php
 											}
 										?>
 									</td>
 									<td>
 										<?php 
-											if(true)
+											if($_SESSION['idAD'] != $DH["maTK"])
 											{
 												if($DH["trangthai"])
 												{
@@ -418,14 +418,14 @@
 											else
 											{
 												?>
-													<span><?php echo $DH["trangthai"] ?></span>
+													<span></span>
 												<?php
 											}
 										?>
 									</td>
 
 									<?php 
-										if($_SESSION['quyenAD'])
+										if($_SESSION['quyenAD'] && $_SESSION['idAD'] != $DH["maTK"])
 										{
 											?>
 											<td style="vertical-align: middle; text-align: center;">

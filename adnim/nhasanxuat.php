@@ -123,9 +123,6 @@
 													window.location.href="delnsx.php?id=<?php echo $DH["maNSX"]; ?>";
 											}
 										</script>
-										<button type="button" class="btn btn-danger onclick="delNSX<?php echo $DH["maNSX"]; ?>()" style="margin-left: 10px; width: 120px">
-											<span class="glyphicon glyphicon-remove-sign"></span> Xoa
-										</button>
 									</td>
 								<?php
 							}

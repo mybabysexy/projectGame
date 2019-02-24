@@ -176,7 +176,7 @@
 						?>
 						<td>
 							<?php 
-								if(true)
+								if($_SESSION['idAD'] != $DH["maTK"])
 								{
 									if($DH["maQuyen"])
 									{
@@ -218,14 +218,14 @@
 								else
 								{
 									?>
-										<span><?php echo $DH["trangthai"] ?></span>
+										<span></span>
 									<?php
 								}
 							?>
 						</td>
 						<td>
 							<?php 
-								if(true)
+								if($_SESSION['idAD'] != $DH["maTK"])
 								{
 									if($DH["trangthai"])
 									{
@@ -267,14 +267,14 @@
 								else
 								{
 									?>
-										<span><?php echo $DH["trangthai"] ?></span>
+										<span></span>
 									<?php
 								}
 							?>
 						</td>
 
 						<?php 
-							if($_SESSION['quyenAD'])
+							if($_SESSION['quyenAD'] && $_SESSION['idAD'] != $DH["maTK"])
 							{
 								?>
 								<td style="vertical-align: middle; text-align: center;">
@@ -282,7 +282,7 @@
 										<span class="glyphicon glyphicon-pencil"></span>
 										 Edit
 									</button>
-									<script type="text/javascript">
+									<!-- <script type="text/javascript">
 										function delTK<?php echo $DH["maTK"]; ?>()
 										{
 											if(confirm("Delete forever?"))
@@ -291,7 +291,7 @@
 									</script>
 									<button type="button" class="btn btn-danger" onclick="delTK<?php echo $DH["maTK"]; ?>()" style="margin: 5px; margin-left: 10px; width: 120px">
 										<span class="glyphicon glyphicon-trash"></span> Delete
-									</button>
+									</button> -->
 								</td>
 								<?
 							}

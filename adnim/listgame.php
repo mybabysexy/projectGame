@@ -170,14 +170,11 @@
 											window.open('chinhsuagame.php?id=<?php echo $sp["maSP"] ?>', 'example', 'width=800,height=400');
 										}
 									</script>
-									<a href="" class="btn btn-danger disabled" style="margin-left: 5px; width: 75px">
-										<span class="glyphicon glyphicon-trash"></span> Xóa
-									</a>
-									<a href="chinhsuagame.php?id=<?php echo $sp["maSP"] ?>" target="_blank" class="btn btn-info" style="margin-left: 5px; width: 135px">
+									<a href="chinhsuagame.php?id=<?php echo $sp["maSP"] ?>" target="_blank" class="btn btn-default" style="margin-left: 5px; width: 135px">
 										<span class="glyphicon glyphicon-pencil"></span> Sửa nâng cao
 									</a>
 									<button type="submit" class="btn btn-success" style="margin-left: 5px; width: 120px">
-										<span class="glyphicon glyphicon-pencil"></span> Sửa nhanh
+										<span class="glyphicon glyphicon-pencil"></span> Sửa
 									</button>
 								</div>
 							</div>
