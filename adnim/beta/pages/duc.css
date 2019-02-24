@@ -1,0 +1,270 @@
+h1,h2,h3,label,span
+{
+	font-family: Helvetica,Arial,sans-serif;
+}
+
+.pd-5
+{
+	padding: 5px;
+}
+.pd-10
+{
+	padding: 10px;
+}
+.pdl-5
+{
+	padding-left: 5px;
+}
+.pdl-10
+{
+	padding-left: 10px;
+}
+.pdr-5
+{
+	padding-right: 5px;
+}
+.pdr-10
+{
+	padding-right: 10px;
+}
+.pdt-5
+{
+	padding-top: 5px;
+}
+.pdt-10
+{
+	padding-top: 10px;
+}
+.pdb-5
+{
+	padding-bottom: 5px;
+}
+.pdb-10
+{
+	padding-bottom: 10px;
+}
+
+.mg-0
+{
+	margin: 0px;
+}
+.mg-5
+{
+	margin: 5px;
+}
+.mg-10
+{
+	margin: 10px;
+}
+.mgl-5
+{
+	margin-left: 5px;
+}
+.mgl-10
+{
+	margin-left: 10px;
+}
+.mgr-5
+{
+	margin-right: 5px;
+}
+.mgr-10
+{
+	margin-right: 10px;
+}
+.mgt-5
+{
+	margin-top: 5px;
+}
+.mgt-10
+{
+	margin-top: 10px;
+}
+.mgt-20
+{
+	margin-top: 20px;
+}
+.mgt-30
+{
+	margin-top: 30px;
+}
+.mgb-5
+{
+	margin-bottom: 5px;
+}
+.mgb-10
+{
+	margin-bottom: 10px;
+}
+
+.cblue
+{
+	color: blue;
+}
+.cpink
+{
+	color: pink;
+}
+.chotpink
+{
+	color: hotpink;
+}
+.cred
+{
+	color: red;
+}
+.cyellow
+{
+	color: yellow;
+}
+.ccyan
+{
+	color: cyan;
+}
+.cgreen
+{
+	color: green;
+}
+.cbrown
+{
+	color: brown;
+}
+.clightgrey
+{
+	color: lightgrey;
+}
+.cnavy
+{
+	color: navy;
+}
+.cblack
+{
+	color: black;
+}
+.cwhite
+{
+	color: white;
+}
+
+.bgblue
+{
+	background-color: blue;
+}
+.bgpink
+{
+	background-color: pink;
+}
+.bghotpink
+{
+	background-color: hotpink;
+}
+.bgred
+{
+	background-color: red;
+}
+.bgyellow
+{
+	background-color: yellow;
+}
+.bgcyan
+{
+	background-color: cyan;
+}
+.bggreen
+{
+	background-color: green;
+}
+.bgbrown
+{
+	background-color: brown;
+}
+.bglightgrey
+{
+	background-color: lightgrey;
+}
+.bglightgray
+{
+	background-color: lightgray;
+}
+.bgnavy
+{
+	background-color: navy;
+}
+.bgblack
+{
+	background-color: black;
+}
+.bgwhite
+{
+	background-color: white;
+}
+
+.flex
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.textnodecor
+{
+	text-decoration: none;
+}
+
+.block
+{
+	display: block;
+}
+
+.hidden
+{
+	display: none;
+}
+
+.fullBody
+{
+	margin: 0;
+	padding: 0;
+}
+
+.fullPage
+{
+	width: 100%;
+	height: 100vh;
+}
+
+.fullSize
+{
+	width: 100%;
+	height: 100%;
+}
+
+.fullWidth
+{
+	width: 100%;
+}
+
+.floatLeft
+{
+	float: left;
+}
+
+.floatRight
+{
+	float: right;
+}
+
+.oneThird
+{
+	width: 33.33%;
+}
+
+.text-center
+{
+	text-align: center;
+}
+
+.bold
+{
+	font-weight: bold;
+}
