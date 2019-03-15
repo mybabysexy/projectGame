@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	include '../../connectDB.php';
-	if(!isset($_SESSION['idAD'])) header("location: ../index.php");
+	if(!isset($_SESSION['idAD']) || $_SESSION['maQuyen'] == 0 ) header("location: ../index.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -181,9 +181,8 @@
 									if($DH["maQuyen"])
 									{
 										?>
-											<button type="button" class="btn btn-success"style="width: 110px; margin: 5px" disabled>
-												Super Admin
-											</button>
+											<i class="fa fa-circle text-success"></i> Super Admin
+											<br>
 											<script type="text/javascript">
 												function adm<?php echo $DH["maTK"]; ?>()
 												{
@@ -199,6 +198,8 @@
 									else
 									{
 										?>
+										<i class="fa fa-circle text-danger"></i> Admin
+											<br>
 											<script type="text/javascript">
 												function sadm<?php echo $DH["maTK"]; ?>()
 												{
@@ -208,9 +209,6 @@
 											</script>
 											<button type="button" class="btn btn-success" onclick="sadm<?php echo $DH["maTK"]; ?>()" style="width: 110px; margin: 5px">
 												Make SA
-											</button>
-											<button type="button" class="btn btn-info" style="width: 110px; margin: 5px" disabled>
-												Admin
 											</button>
 										<?
 									}
@@ -225,56 +223,54 @@
 						</td>
 						<td>
 							<?php 
-								if($_SESSION['idAD'] != $DH["maTK"])
-								{
-									if($DH["trangthai"])
-									{
-										?>
-											<button type="button" class="btn btn-success"style="width: 80px; margin: 5px" disabled>
-												Actived
-											</button>
-											<script type="text/javascript">
-												function ban<?php echo $DH["maTK"]; ?>()
-												{
-													if(confirm("Ban this account?"))
-														window.location.href="banTK.php?id=<?php echo $DH["maTK"]; ?>";
-												}
-											</script>
-											<button type="button" class="btn btn-warning" onclick="ban<?php echo $DH["maTK"]; ?>()" style="width: 80px; margin: 5px">
-												Ban
-											</button>
-										<?
-									}
-									else
-									{
-										?>
-											<script type="text/javascript">
-												function active<?php echo $DH["maTK"]; ?>()
-												{
-													if(confirm("Active this account?"))
-														window.location.href="actTK.php?id=<?php echo $DH["maTK"]; ?>";
-												}
-											</script>
-											<button type="button" class="btn btn-success" onclick="active<?php echo $DH["maTK"]; ?>()" style="width: 80px; margin: 5px">
-												Activate
-											</button>
-											<button type="button" class="btn btn-danger" style="width: 80px; margin: 5px" disabled>
-												Banned
-											</button>
-										<?
-									}
-								}
-								else
-								{
-									?>
-										<span></span>
-									<?php
-								}
-							?>
+																		if($_SESSION['idAD'] != $DH["maTK"])
+																		{
+																			if($DH["trangthai"])
+																			{
+																				?>
+																					<i class="fa fa-circle text-success"></i> Active
+																					<br>
+																					<script type="text/javascript">
+																						function ban<?php echo $DH["maTK"]; ?>()
+																						{
+																							if(confirm("Ban this account?"))
+																								window.location.href="banTK.php?id=<?php echo $DH["maTK"]; ?>";
+																						}
+																					</script>
+																					<button type="button" class="btn btn-warning" onclick="ban<?php echo $DH["maTK"]; ?>()" style="width: 80px; margin: 5px">
+																						Ban
+																					</button>
+																				<?
+																			}
+																			else
+																			{
+																				?>
+																				<i class="fa fa-circle text-danger"></i> Banned
+																					<br>
+																					<script type="text/javascript">
+																						function active<?php echo $DH["maTK"]; ?>()
+																						{
+																							if(confirm("Active this account?"))
+																								window.location.href="actTK.php?id=<?php echo $DH["maTK"]; ?>";
+																						}
+																					</script>
+																					<button type="button" class="btn btn-success" onclick="active<?php echo $DH["maTK"]; ?>()" style="width: 80px; margin: 5px">
+																						Activate
+																					</button>
+																				<?
+																			}
+																		}
+																		else
+																		{
+																			?>
+																				<span></span>
+																			<?php
+																		}
+																	?>
 						</td>
 
 						<?php 
-							if($_SESSION['quyenAD'] && $_SESSION['idAD'] != $DH["maTK"])
+							if($_SESSION['quyenAD'])
 							{
 								?>
 								<td style="vertical-align: middle; text-align: center;">
