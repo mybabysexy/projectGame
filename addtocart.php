@@ -30,8 +30,6 @@
 				$_SESSION['cartItem'][$id] = 1;
 			}
 		}
-		// echo count($_SESSION['cartItem']);
-		// $_SESSION['cartItem'][$id] = $id;
 
 		$sumSL = 0;
 		foreach ($_SESSION['cartItem'] as $key => $value) {
