@@ -139,7 +139,7 @@ include '../template.php';
 				</div>
 		</div>
 		<div id="footer" style="position: fixed;bottom: 0">
-			Lương Minh Đức - Vũ Văn Toàn
+			@ 2020 - Bản quyền của ACC GAMING
 		</div>
 	</div>
 	<?php mysqli_close($con) ?>

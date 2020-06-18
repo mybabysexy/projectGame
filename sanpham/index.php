@@ -65,11 +65,17 @@
 								<h4 style="margin-bottom: 12px">
 									Thể loại: <?php echo $sp["theLoai"] ?> - Từ: <?php echo $sp["NSX"] ?>
 								</h4>
+								<?php
+									$sql = "select tenSP, a.* from sanpham inner join (SELECT maSP, sum(hoadonchitiet.soluong) as sold FROM `hoadon` inner join hoadonchitiet on hoadon.maDonHang = hoadonchitiet.maDonHang WHERE `tinhTrang` = 1 and maSP = ".$sp['maSP']." group by hoadonchitiet.maSP)a on sanpham.maSP = a.maSP";
+									$soldDB = mysqli_query($con, $sql);
+									$sold = mysqli_fetch_array($soldDB);
+								?>
 								<h4>
-									Giá: <span class="spPrice"> <?php if($sp["soLuong"] != 0) echo $sp["gia"]; else echo "Hết hàng" ?> </span>
+									Giá: <span class="spPrice"> <?php if($sp["soLuong"] != 0) echo number_format($sp["gia"],0,0,'.')."đ"; else echo "Hết hàng" ?> </span>
 								</h4>
 									Số lượng: <input type="text" id="sl" style="width: 50px; text-align: center; display: inline-block; margin-bottom: 10px" class="form-control" value="1">
 									 - Còn: <span id="soLuong"><strong><?php echo $sp['soLuong'] ?></strong></span> mã trong kho
+									 - Đã bán: <strong><?php echo $sold['sold']?:0; ?></strong> mã
 								<br>
 								<?php 
 									if($sp["soLuong"] != 0)
@@ -117,7 +123,7 @@
 		?>		
 	</div>
 	<div id="footer" class="col-lg-12">
-			Lương Minh Đức - Vũ Văn Toàn
+		@ 2020 - Bản quyền của ACC GAMING
 	</div>
 </body>
 </html>

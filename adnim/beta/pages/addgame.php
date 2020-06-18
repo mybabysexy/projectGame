@@ -382,7 +382,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
 	<!-- Default to the left -->
-	<strong>Bản quyền thuộc về Lương Minh Đức - Vũ Văn Toàn - 2019</strong>
+	<strong>@ 2020 - Bản quyền của ACC GAMING</strong>
   </footer>  
 </div>
 <!-- ./wrapper -->

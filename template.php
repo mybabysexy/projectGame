@@ -6,11 +6,11 @@
 		<?php 
 			if(isset($_GET['page']))
 			{
-				echo "Duc Toan Gaming - Trang ".$_GET['page'];
+				echo "ACC Gaming - Trang ".$_GET['page'];
 			}
 			else
 			{
-				echo "Duc Toan Gaming";
+				echo "ACC Gaming";
 			}
 		?>
 	</title>
@@ -283,7 +283,7 @@
 		<div id="head">
 			<div id="topbar">
 				<div style="width: 70%; height: 100%; display: flex; align-items: center;">
-					<p style="margin: 0px 30px; float: left;">Chào mừng các bạn tới với trang chúng tôi - Thuê game - Bán game</p>
+					<p style="margin: 0px 30px; float: left;">Chào mừng các bạn tới với ACC GAMING</p>
 				</div>
 				<?php
 					if(isset($_SESSION['nameKH']))

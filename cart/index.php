@@ -142,7 +142,6 @@ include '../template.php';
 												}
 												console.log(i+" Next");
 											}
-											$('#submitBtn').click();
 
 											if (checkCart == 0) {
 												if(confirm("Chắc chắn chứ?")) window.location.href = "../thanhtoan/";
@@ -194,7 +193,7 @@ include '../template.php';
 	}
 ?>
 <div id="footer" style="position: fixed;bottom: 0">
-	Lương Minh Đức - Vũ Văn Toàn
+	@ 2020 - Bản quyền của ACC GAMING
 </div>
 </div>
 <script type="text/javascript">

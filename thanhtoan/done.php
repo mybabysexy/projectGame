@@ -41,7 +41,7 @@
 		<a href="../" class="btn btn-success btn-lg">Về trang chủ</a>
 	</div>
 	<div id="footer" style="position: fixed;bottom: 0">
-		Lương Minh Đức - Vũ Văn Toàn
+		@ 2020 - Bản quyền của ACC GAMING
 	</div>
 </body>
 </html>

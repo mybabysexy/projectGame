@@ -33,7 +33,7 @@ include 'template.php';
 		<div id="body">
 			<div>
 				<div align="center">
-					<h1 id="header">- Tất cả game -</h1>
+					<h1 id="header">- Danh mục game -</h1>
 				</div>
 				<div align="center" style="margin: 5px">
 					<form class="form-group">
@@ -216,9 +216,9 @@ include 'template.php';
 										<p style="margin: 5px 0px; font-size: 16px">
 											Thể loại: <?php echo $sp["theLoai"] ?> - Từ: <?php echo $sp["NSX"] ?>
 										</p>
-										<p style="margin: 5px 0px">Giá:
+										<p style="margin: 5px 0px">
 											<span class="spPrice">
-												<?php if($sp["soLuong"] != 0) echo $sp["gia"]; else echo "Hết hàng" ?>
+												<?php if($sp["soLuong"] != 0) echo number_format($sp["gia"],0,0,'.')."đ"; else echo "Hết hàng" ?>
 											</span>
 										</p>
 										<div style="margin: 8px">
@@ -279,7 +279,7 @@ include 'template.php';
 					<nav aria-label="...">
 						<ul class="pagination pagination-lg">
 							<li class="page-item" id="pgPrev">
-							  <a class="page-link" id="apgPrev" href="?page=<?php echo $_GET['page']-1 ?>" tabindex="-1"><</a>
+							  <a class="page-link" id="apgPrev" href="?page=<?php echo $_GET['page']-1 ?>" tabindex="-1">< Trước</a>
 							</li>
 								<?php
 									for ($i=1; $i <= $demPage; $i++) { 
@@ -305,7 +305,7 @@ include 'template.php';
 									<?php
 								?>
 							<li class="page-item" id="pgNext">
-							  <a class="page-link" id="apgNext href="?page=<?php echo $currentPage+1 ?>">></a>
+							  <a class="page-link" id="apgNext" href="?page=<?php echo $currentPage+1 ?>">Sau ></a>
 							</li>
 						</ul>
 					</nav>
@@ -335,7 +335,7 @@ include 'template.php';
 	</div>
 		</div>
 		<div id="footer" class="col-lg-12">
-			Lương Minh Đức - Vũ Văn Toàn
+			@ 2020 - Bản quyền của ACC GAMING
 		</div>
 		<?php mysqli_close($con); ?>
 	</div>

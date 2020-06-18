@@ -1,4 +1,4 @@
-<?php 
+<?php
 	session_start();
 	if(isset($_SESSION['idKH']))
 	{
@@ -23,6 +23,7 @@
 		echo $sumPrice;
 
 		$sql = "insert into hoadon(maDonHang,maTK,tongTien,tinhTrang) values($nextCode,$maKH, $sumPrice, 0)";
+		echo $sql;
 		mysqli_query($con, $sql);
 
 		foreach ($_SESSION['cartItem'] as $key => $value) 
@@ -56,7 +57,7 @@
 			}
 		}
 		unset($_SESSION['cartItem']);
-		header("location: done.php");
 		mysqli_close($con);
+		header("location: done.php");
 	}
 ?>

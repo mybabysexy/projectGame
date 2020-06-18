@@ -50,7 +50,7 @@ include '../template.php';
 			</div>
 		</div>
 		<div id="footer">
-			Lương Minh Đức - Vũ Văn Toàn
+			@ 2020 - Bản quyền của ACC GAMING
 		</div>
 	</div>
 </body>

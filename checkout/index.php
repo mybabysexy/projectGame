@@ -30,18 +30,12 @@ include '../template.php';
 							mysqli_close($con);
 						}
 					?>
-					<script type="text/javascript">
-						function go()
-						{
-							window.location.href="../buyNOW.php?id=<?php echo $sp['maSP'] ?>";
-						}
-					</script>
-					<input type="button" name="" class="btn btn-lg btn-success" value="Thanh toán" onclick="go()">
+					<a href="../buyNOW.php?id=<?php echo $sp['maSP'] ?>" class="btn btn-lg btn-success">Thanh toán</a>
 				</div>
 			</div>
 		</div>
 		<div id="footer">
-			Lương Minh Đức - Vũ Văn Toàn
+			@ 2020 - Bản quyền của ACC GAMING
 		</div>
 	</div>
 </body>
